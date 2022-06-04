@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './auth.controller';
@@ -9,8 +10,11 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     JwtModule.register({
-      secret: 'dev',
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '365d' },
     }),
     TypeOrmModule.forFeature([Auth]),

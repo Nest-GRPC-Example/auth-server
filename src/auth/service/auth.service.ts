@@ -96,6 +96,6 @@ export class AuthService {
       };
     }
 
-    return { status: HttpStatus.OK, error: null, userId: decoded.id };
+    return { status: HttpStatus.OK, error: [], userId: decoded.id };
   }
 }
